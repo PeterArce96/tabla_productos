@@ -61,28 +61,31 @@
                     </table>
                 </section>
                 <section class="col-md-4">
+                    <h2 class="text-center">Crear Producto</h2>
                     <form class="py-2" id="formCalculadora">
                         <div class="form-floating mb-3 border border-info">
-                            <input type="number" class="form-control" id="numero1" placeholder="Numero 1" />
-                            <label for="numero1">Número 1</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        <div class="form-floating mb-3 border border-info">
+                            <input type="number" class="form-control" id="precio" placeholder="precio" />
+                            <label for="precio">Precio</label>
+                        </div>
+                        <div class="form-floating mb-3 border border-info">
+                            <input type="text" class="form-control" id="marca" placeholder="marca" />
+                            <label for="marca">Marca</label>
+                        </div>
+                        <div class="form-floating mb-3 border border-info">
+                            <input type="text" class="form-control" id="categoria" placeholder="categoria" />
+                            <label for="categoria">Categoría</label>
+                        </div>
+                        <div class="form-floating mb-3 border border-info">
+                            <input type="number" class="form-control" id="stock" placeholder="stock" />
+                            <label for="stock">Stock</label>
                         </div>
 
-                        <div class="form-floating mb-3 border border-info">
-                            <select class="form-select" id="operador" aria-label="Operador">
-                                <option value="+" selected>+</option>
-                                <option value="-">-</option>
-                                <option value="*">*</option>
-                                <option value="/">/</option>
-                            </select>
-                            <label for="operador">Operador</label>
-                        </div>
-
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="number" class="form-control" id="numero2" placeholder="Numero 2" />
-                            <label for="numero2">Número 2</label>
-                        </div>
                         <div class="badge bg-danger mb-3" id="contenedorError"></div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3">Calcular</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Crear</button>
                         <div class="bg-success text-white fs-2 fw-bold rounded" id="contenedorResultado"></div>
                     </form>
                 </section>
