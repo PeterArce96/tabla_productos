@@ -32,73 +32,59 @@
                                 <!-- <th scope="col">Acciones</th> -->
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Laptop</td>
-                                <td>8000</td>
-                                <td>MSI</td>
-                                <td>Tecnología</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Laptop</td>
-                                <td>5000</td>
-                                <td>Gigabyte</td>
-                                <td>Tecnología</td>
-                                <td>10</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Laptop</td>
-                                <td>6000</td>
-                                <td>Asus</td>
-                                <td>Tecnología</td>
-                                <td>10</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="tBodyProducto"></tbody>
                     </table>
                 </section>
                 <section class="col-md-4">
-                    <h2 class="text-center py-3">Crear Producto</h2>
-                    <form id="formCalculadora">
+                    <h2 class="text-center py-3">Crear producto</h2>
+                    <form class="py-2" id="formProducto">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control border border-info" id="nombre" placeholder="Nombre" />
+                            <input type="text" class="form-control border border-info" name="nombre" placeholder="Nombre" required
+                                value="Impresora 3D" />
                             <label for="nombre">Nombre</label>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control border border-info" id="precio" placeholder="precio" />
+                            <input type="number" class="form-control border border-info" name="precio" placeholder="Precio" required
+                                value="5000" />
                             <label for="precio">Precio</label>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control border border-info" id="marca" placeholder="marca" />
+                            <input type="text" class="form-control border border-info" name="marca" placeholder="Marca" required
+                                value="EPSON" />
                             <label for="marca">Marca</label>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control border border-info" id="categoria" placeholder="categoria" />
+                            <input type="text" class="form-control border border-info" name="categoria" placeholder="Categoría" required
+                                value="Tecnología" />
                             <label for="categoria">Categoría</label>
                         </div>
+
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control border border-info" id="stock" placeholder="stock" />
+                            <input type="number" class="form-control border border-info" name="stock" placeholder="Stock" required
+                                value="5" />
                             <label for="stock">Stock</label>
                         </div>
 
-                        <div class="badge bg-danger mb-3" id="contenedorError"></div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3 fs-5">Crear</button>
-                        <div class="bg-success text-white fs-2 fw-bold rounded" id="contenedorResultado"></div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Crear</button>
                     </form>
+                    <div class="badge bg-danger w-100" id="contenedorError"></div>
                 </section>
             </div>
         </section>
     </main>
-    <footer class="bg-dark text-light text-center fixed-bottom p-2">
+
+    <footer class="fixed-bottom bg-dark text-light text-center p-2">
         <h6 class="m-0">
-          Desarrollado por Peter Arce
+            Desarrollado por Peter Arce
         </h6>
-      </footer>
+    </footer>
 
     <script src="./js/index.js" type="module"></script>
 </body>
+
+</html>
 
 </html>
