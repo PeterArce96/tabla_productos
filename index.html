@@ -61,38 +61,42 @@
                     </table>
                 </section>
                 <section class="col-md-4">
-                    <h2 class="text-center">Crear Producto</h2>
-                    <form class="py-2" id="formCalculadora">
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" />
+                    <h2 class="text-center py-3">Crear Producto</h2>
+                    <form id="formCalculadora">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-info" id="nombre" placeholder="Nombre" />
                             <label for="nombre">Nombre</label>
                         </div>
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="number" class="form-control" id="precio" placeholder="precio" />
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control border border-info" id="precio" placeholder="precio" />
                             <label for="precio">Precio</label>
                         </div>
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="text" class="form-control" id="marca" placeholder="marca" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-info" id="marca" placeholder="marca" />
                             <label for="marca">Marca</label>
                         </div>
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="text" class="form-control" id="categoria" placeholder="categoria" />
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control border border-info" id="categoria" placeholder="categoria" />
                             <label for="categoria">Categoría</label>
                         </div>
-                        <div class="form-floating mb-3 border border-info">
-                            <input type="number" class="form-control" id="stock" placeholder="stock" />
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control border border-info" id="stock" placeholder="stock" />
                             <label for="stock">Stock</label>
                         </div>
 
                         <div class="badge bg-danger mb-3" id="contenedorError"></div>
-                        <button type="submit" class="btn btn-primary w-100 mb-3">Crear</button>
+                        <button type="submit" class="btn btn-primary w-100 mb-3 fs-5">Crear</button>
                         <div class="bg-success text-white fs-2 fw-bold rounded" id="contenedorResultado"></div>
                     </form>
                 </section>
             </div>
         </section>
     </main>
-
+    <footer class="bg-dark text-light text-center fixed-bottom p-2">
+        <h6 class="m-0">
+          Desarrollado por Peter Arce
+        </h6>
+      </footer>
 
 </body>
 
