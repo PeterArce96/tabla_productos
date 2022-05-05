@@ -1,4 +1,4 @@
-export class Producto{
+class Producto{
     //guión abajo para hacerlas privadas
 
     static contadorProducto = 0;
