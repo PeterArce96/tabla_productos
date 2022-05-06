@@ -9,9 +9,47 @@ let productos = [
   new Producto('Cargador', 100, 'Huawei', 'Tecnología', 100)
 ];
 
-const contenedorError = document.querySelector('#contenedorError');
+const contenedorAlerta = document.querySelector('#contenedorAlerta');
+let timeoutId = 0;
 
-const createProduct = () => {
+const showAlert = (type, content) => {
+  clearTimeout(timeoutId);
+  contenedorAlerta.classList.remove('bg-primary');
+  contenedorAlerta.classList.remove('bg-success');
+  contenedorAlerta.classList.remove('bg-danger');
+  switch (type) {
+    case 'primary':
+      contenedorAlerta.classList.add('bg-primary');
+      break;
+    case 'success':
+      contenedorAlerta.classList.add('bg-success');
+      break;
+    case 'danger':
+      contenedorAlerta.classList.add('bg-danger');
+      break;
+    default:
+      contenedorAlerta.classList.add('bg-primary');
+      break;
+  }
+  contenedorAlerta.innerHTML = content;
+  timeoutId = setTimeout(() => {
+    contenedorAlerta.innerHTML = '';
+  }, 5000);
+};
+
+const getFormData = () => {
+  const documentFormProducto = document.forms['formProducto'];
+  const id = documentFormProducto['id'].value;
+  const nombre = documentFormProducto['nombre'].value;
+  const precio = documentFormProducto['precio'].value;
+  const marca = documentFormProducto['marca'].value;
+  const categoria = documentFormProducto['categoria'].value;
+  const stock = documentFormProducto['stock'].value;
+
+  return ({ id, nombre, precio, marca, categoria, stock });
+};
+
+const validateForm = () => {
   const documentFormProducto = document.forms['formProducto'];
   const nombre = documentFormProducto['nombre'].value;
   const precio = documentFormProducto['precio'].value;
@@ -19,18 +57,28 @@ const createProduct = () => {
   const categoria = documentFormProducto['categoria'].value;
   const stock = documentFormProducto['stock'].value;
 
-  if ([nombre.trim(), precio.trim(), marca.trim(), categoria.trim(), stock.trim()].includes('')) {
-    contenedorError.innerHTML = 'Completar todos los campos';
+  return [nombre.trim(), precio.trim(), marca.trim(), categoria.trim(), stock.trim()].includes('');
+};
+
+const resetForm = () => {
+  const documentFormProducto = document.forms['formProducto'];
+  documentFormProducto['id'].value = '';
+  documentFormProducto['nombre'].value = '';
+  documentFormProducto['precio'].value = '';
+  documentFormProducto['marca'].value = '';
+  documentFormProducto['categoria'].value = '';
+  documentFormProducto['stock'].value = '';
+};
+
+const createProduct = () => {
+  const { nombre, precio, marca, categoria, stock } = getFormData();
+  if (validateForm()) {
+    showAlert('danger', 'Completar todos los campos');
   } else {
-    productos.push(new Producto(nombre, +precio, marca, categoria, +stock));
-    // productos = [...productos, new Producto(nombre, +precio, marca, categoria, +stock)];
-    // Limpiar formulario
-    documentFormProducto['nombre'].value = '';
-    documentFormProducto['precio'].value = '';
-    documentFormProducto['marca'].value = '';
-    documentFormProducto['categoria'].value = '';
-    documentFormProducto['stock'].value = '';
+    productos = [...productos, new Producto(nombre, +precio, marca, categoria, +stock)];
+    resetForm();
     readProducts();
+    showAlert('primary', 'Registro creado');
   }
 };
 
@@ -65,6 +113,7 @@ const readProducts = () => {
       </tr>
     `
   });
+  showAlert('primary', 'Registros leídos');
 };
 
 const readProduct = (productId) => {
@@ -75,11 +124,7 @@ const readProduct = (productId) => {
   const producto = productos.find((element) => {
     return element.id === productId;
   });
-  // const producto = productos.filter((element) => {
-  //   return element.id === productId;
-  // });
   const { id, nombre, precio, marca, categoria, stock } = producto;
-  // const { id, nombre, precio, marca, categoria, stock } = producto[0];
 
   formTitle.innerHTML = 'Editar producto';
   formButton.innerHTML = 'Editar';
@@ -89,19 +134,77 @@ const readProduct = (productId) => {
   documentFormProducto['marca'].value = marca;
   documentFormProducto['categoria'].value = categoria;
   documentFormProducto['stock'].value = stock;
-}
+  showAlert('primary', 'Registro leído');
+};
+
+const updateProduct = () => {
+  const { id, nombre, precio, marca, categoria, stock } = getFormData();
+  const formTitle = document.querySelector('#formTitle');
+  const formButton = document.querySelector('#formButton');
+
+  if (validateForm()) {
+    showAlert('danger', 'Completar todos los campos');
+  } else {
+    productos = productos.map((element) => {
+      if (element.id !== +id) {
+        return element;
+      } else {
+        element.nombre = nombre;
+        element.precio = +precio;
+        element.marca = marca;
+        element.categoria = categoria;
+        element.stock = +stock;
+        return element;
+      }
+    });
+
+    resetForm();
+    formTitle.innerHTML = 'Crear producto';
+    formButton.innerHTML = 'Crear';
+    readProducts();
+    showAlert('success', 'Registro actualizado');
+  }
+};
 
 const deleteProduct = (id) => {
-  if (confirm('¿Está seguro que desea eliminarlo?')) {
-    // const index = productos.findIndex((element) => {
-    //   return element.id === id;
-    // });
-    // productos.splice(index, 1);
-    productos = productos.filter((element) => {
-      return element.id !== id;
-    });
-    readProducts();
-  }
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: 'btn btn-success mx-2',
+      cancelButton: 'btn btn-danger mx-2'
+    },
+    buttonsStyling: false
+  });
+
+  swalWithBootstrapButtons.fire({
+    title: '¿Está seguro?',
+    text: "¡No podrás revertir esto!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: '¡Sí, elimínalo!',
+    cancelButtonText: '¡No, cancélalo!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      productos = productos.filter((element) => {
+        return element.id !== id;
+      });
+      readProducts();
+      showAlert('danger', 'Registro eliminado');
+      swalWithBootstrapButtons.fire(
+        '¡Eliminado!',
+        'Tu registro ha sido eliminado.',
+        'success'
+      );
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire(
+        'Cancelado',
+        'Tu registro está seguro',
+        'error'
+      );
+    }
+  });
 };
 
 const documentReady = () => {
@@ -113,7 +216,7 @@ const documentReady = () => {
     if (id === '') {
       createProduct();
     } else {
-      console.log('Editar');
+      updateProduct();
     }
   };
 

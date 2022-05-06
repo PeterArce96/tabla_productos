@@ -38,9 +38,8 @@
                 <section class="col-md-4">
                     <h2 class="text-center py-3" id="formTitle">Crear producto</h2>
                     <form class="py-2" id="formProducto">
-                          <!-- <div class="form-floating mb-3" style="display: none;"> -->
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="id" placeholder="Id" id="formId" />
+                        <div class="form-floating mb-3" style="display: none;">
+                            <input type="number" class="form-control" name="id" placeholder="Id" id="formId" readonly />
                             <label for="id">Id</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -70,7 +69,7 @@
 
                         <button type="submit" class="btn btn-primary w-100 mb-3" id="formButton">Crear</button>
                     </form>
-                    <div class="badge bg-danger w-100" id="contenedorError"></div>
+                    <div class="badge w-100" id="contenedorAlerta"></div>
                 </section>
             </div>
         </section>
@@ -81,7 +80,7 @@
             Desarrollado por Peter Arce
         </h6>
     </footer>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/Producto.js"></script>
     <script src="./js/index.js"></script>
 </body>
